@@ -1,6 +1,7 @@
 package Game.Entities.Dynamic;
 
 import Main.Handler;
+import Main.GameSetUp;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -18,7 +19,7 @@ public class Player {
     public int xCoord;
     public int yCoord;
 
-    public int moveCounter;
+    public int moveCounter, speed;
 
     public String direction;//is your first name one?
 
@@ -30,12 +31,13 @@ public class Player {
         direction= "Right";
         justAte = false;
         lenght= 1;
+        speed = 5;
 
     }
 
     public void tick(){
         moveCounter++;
-        if(moveCounter>=5) {
+        if(moveCounter>=speed) {
             checkCollisionAndMove();
             moveCounter=2;
         }
@@ -49,6 +51,10 @@ public class Player {
             direction="Right";
         }if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_N)){
             AddTail();
+        }if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_EQUALS)){
+        	speed-=1;
+        }if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_MINUS)) {
+        	speed+=1;
         }
 
     }
