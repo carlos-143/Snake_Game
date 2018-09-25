@@ -7,11 +7,13 @@ import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.util.Random;
 
+import Game.GameStates.State;
+
 /**
  * Created by AlexVR on 7/2/2018.
  */
 public class Player {
-
+	boolean gameOver = false;
     public int lenght;
     public boolean justAte,isUp,isDown,isLeft,isRight;
     private Handler handler;
@@ -94,6 +96,18 @@ public class Player {
                 break;
         }
         handler.getWorld().playerLocation[xCoord][yCoord]=true;
+        
+        if(lenght>1)
+        	
+        for (int i=0; i < lenght-1; i++) {
+	
+        	if((xCoord == handler.getWorld().body.get(i).x)
+        		&& yCoord == handler.getWorld().body.get(i).y){
+        			kill();
+        			gameOver= true;
+        			speed = 0;
+        		}
+}
 
 
         if(handler.getWorld().appleLocation[xCoord][yCoord]){
@@ -109,6 +123,7 @@ public class Player {
     }
 
     public void render(Graphics g,Boolean[][] playeLocation){
+    	
     	Random r = new Random();
         for (int i = 0; i < handler.getWorld().GridWidthHeightPixelCount; i++) {
             for (int j = 0; j < handler.getWorld().GridWidthHeightPixelCount; j++) {
@@ -123,7 +138,12 @@ public class Player {
 
             }
         }
-
+        if (gameOver) {
+        	
+            g.setColor(Color.white);
+            g.setFont(new Font("arial", Font.BOLD, 50));
+            g.drawString("Game Over", 300, 300);
+        }
 
     }
 
@@ -350,6 +370,7 @@ public class Player {
 
             }
         }
+        gameOver= true;
     }
 
     public boolean isJustAte() {
