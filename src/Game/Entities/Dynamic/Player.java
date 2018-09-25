@@ -105,7 +105,7 @@ public class Player {
         		&& yCoord == handler.getWorld().body.get(i).y){
         			kill();
         			gameOver= true;
-        			speed = 0;
+        			speed = 10000;
         		}
 }
 
@@ -141,8 +141,8 @@ public class Player {
         if (gameOver) {
         	
             g.setColor(Color.white);
-            g.setFont(new Font("arial", Font.BOLD, 50));
-            g.drawString("Game Over", 300, 300);
+            g.setFont(new Font("arial", Font.BOLD, 100));
+            g.drawString("Game Over", 150, 350);
         }
 
     }
@@ -371,6 +371,7 @@ public class Player {
             }
         }
         gameOver= true;
+        speed = 1000;
     }
 
     public boolean isJustAte() {
