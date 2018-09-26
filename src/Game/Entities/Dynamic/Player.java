@@ -57,6 +57,8 @@ public class Player {
         	speed-=1;
         }if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_MINUS)) {
         	speed+=1;
+        }if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_P)) {
+        	State.setState(handler.getGame().pauseState);
         }
 
     }
