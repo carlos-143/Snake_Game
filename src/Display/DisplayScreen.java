@@ -34,7 +34,7 @@ public class DisplayScreen {
         frame.setResizable(false);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
-        frame.setBackground(Color.red);
+        frame.setBackground(Color.black);
 
         try {
             frame.setIconImage(ImageIO.read(new File("res/Sheets/icon.png")));

@@ -1,8 +1,6 @@
 package Game.Entities.Dynamic;
 
 import Main.Handler;
-import Main.GameSetUp;
-
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.util.Random;
@@ -15,11 +13,14 @@ import Game.GameStates.State;
 public class Player {
 	boolean gameOver = false;
     public int lenght;
-    public boolean justAte,isUp,isDown,isLeft,isRight;
+    public boolean justAte;
     private Handler handler;
+    
 
     public int xCoord;
     public int yCoord;
+	public int totalScore;
+	public Graphics g;
 
     public int moveCounter, speed;
 
@@ -114,6 +115,7 @@ public class Player {
 
         if(handler.getWorld().appleLocation[xCoord][yCoord]){
             Eat();
+            
         }
 
         if(!handler.getWorld().body.isEmpty()) {
@@ -125,6 +127,9 @@ public class Player {
     }
 
     public void render(Graphics g,Boolean[][] playeLocation){
+    	g.setColor(Color.white);
+    	g.setFont(new Font("arial", Font.BOLD, 15));
+    	g.drawString("Score: " + totalScore, 15, 20);
     	
     	Random r = new Random();
         for (int i = 0; i < handler.getWorld().GridWidthHeightPixelCount; i++) {
@@ -146,6 +151,7 @@ public class Player {
             g.setFont(new Font("arial", Font.BOLD, 100));
             g.drawString("Game Over", 150, 350);
         }
+        
 
     }
 
@@ -154,6 +160,7 @@ public class Player {
         Tail tail= null;
         handler.getWorld().appleLocation[xCoord][yCoord]=false;
         handler.getWorld().appleOnBoard=false;
+        totalScore++;
         switch (direction){
             case "Left":
                 if( handler.getWorld().body.isEmpty()){
@@ -237,7 +244,7 @@ public class Player {
                             tail=(new Tail(this.xCoord-1,this.yCoord,handler));
                         }else{
                             tail=(new Tail(this.xCoord+1,this.yCoord,handler));
-                        } System.out.println("Tu biscochito");
+                        }
                     }
                 }else{
                     if(handler.getWorld().body.getLast().y!=0){
@@ -383,4 +390,5 @@ public class Player {
     public void setJustAte(boolean justAte) {
         this.justAte = justAte;
     }
+
 }
